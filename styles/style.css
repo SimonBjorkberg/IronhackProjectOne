@@ -1,59 +1,110 @@
-* {
-    margin: 0;
-    font-size: 10px;
-    font-family: 'Roboto', sans-serif;
+html, h1, p {
+  margin: 0;
+  font-size: 10px;
+  font-family: "Roboto", sans-serif;
+}
+.blue-text {
+    color: rgba(54, 122, 230, 255);
+}
+.grey-hover:hover {
+  background-color: rgb(245, 245, 245);
+}
+.blue-hover:hover {
+  background-color: rgba(54, 152, 230, 255);
+}
+.display-none {
+    display: none;
+}
+.display-block {
+    display: block;
 }
 
-#starting-screen {
-    border: solid 0.1rem lightgrey;
-    width: 60rem;
-    height: 40rem;
-    display: flex;
-    margin: auto;
-    margin-top: 20rem;
+#border {
+  border: solid 0.1rem lightgrey;
+  border-radius: 0.5rem;
+  width: 60rem;
+  height: 40rem;
+  display: flex;
+  margin: auto;
+  margin-top: 20rem;
+}
+
+#dino-container {
+  display: flex;
+  justify-content: center;
+  height: 40%;
+  width: 50%;
+  margin: auto;
+}
+#dino-container > img {
+  margin: auto;
+  width: 40%;
+  height: 70%;
 }
 
 #menu {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-
 #buttons {
-    height: 50%;
-    display: flex;
-    flex-direction: column;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
 }
-.grey {
-    background-color: lightgrey;
+#buttons > button {
+  padding: 2.5rem 12rem;
+  margin: 2rem auto;
+  height: 4rem;
+  width: 35%;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 2rem;
 }
-.blue {
-    background-color: rgba(54,122,230,255);
-}
-#buttons button {
-    padding: 2rem;
-    margin: 2rem auto;
-    display: flex;
-    height: 2rem;
-    border: 0;
-    border-radius: 0.5rem;
-    align-items: center;
-    font-size: 2rem;
+.bb-wt {
+    background-color: rgba(54, 122, 230, 255);
     color: white;
-    font-weight: lighter;
+    border: solid 0.2rem rgba(54, 122, 230, 255);
+}
+.wb-bt {
+    background-color: white;
+    color: rgba(54, 122, 230, 255);
+}
+.b-border {
+    border: solid 0.2rem rgba(54, 122, 230, 255);
 }
 
-#test {
+#instruction-container {
+    padding-top: 2rem;
+    display: none;
+    margin: auto;
+    width: 60rem;
+}
+
+#instruction-container > h1 {
+    font-size: 3rem;
+    text-align: center;
+    padding-bottom: 4rem;
+    color: grey;
+}
+#instruction-container > ul {
+    padding: 0;
+    font-size: 2rem;
     display: flex;
-    justify-content: center;
-    height: 40%;
-    width: 50%;
+    flex-direction: column;
     margin: auto;
 }
-#test img {
-    margin: auto;
-    width: 40%;
-    height: 70%;
+#instruction-container > ul > li {
+    margin-bottom: 2rem;
+    width: 100%;
+    list-style-type: none;
+    text-align: center;
+    color: grey;
+}
+#instruction-container span {
+    color: rgba(54, 122, 230, 255);
 }
