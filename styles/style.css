@@ -3,17 +3,20 @@ html, h1, p {
   font-size: 10px;
   font-family: "Roboto", sans-serif;
 }
-.grey {
-  background-color: lightgrey;
+.blue-text {
+    color: rgba(54, 122, 230, 255);
 }
-.blue {
-  background-color: rgba(54, 122, 230, 255);
-}
-.red-hover:hover {
-  background-color: red;
+.grey-hover:hover {
+  background-color: rgb(245, 245, 245);
 }
 .blue-hover:hover {
-  background-color: rgba(54, 122, 230, 255);
+  background-color: rgba(54, 152, 230, 255);
+}
+.display-none {
+    display: none;
+}
+.display-block {
+    display: block;
 }
 
 #border {
@@ -52,22 +55,32 @@ html, h1, p {
   flex-direction: column;
 }
 #buttons > button {
-  padding: 2rem;
+  padding: 2.5rem 12rem;
   margin: 2rem auto;
   height: 4rem;
-  border: none;
   width: 35%;
-  border-radius: 0.3rem;
+  border-radius: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: space-around;
   font-size: 2rem;
-  color: white;
+}
+.bb-wt {
+    background-color: rgba(54, 122, 230, 255);
+    color: white;
+    border: solid 0.2rem rgba(54, 122, 230, 255);
+}
+.wb-bt {
+    background-color: white;
+    color: rgba(54, 122, 230, 255);
+}
+.b-border {
+    border: solid 0.2rem rgba(54, 122, 230, 255);
 }
 
 #instruction-container {
     padding-top: 2rem;
-    display: block;
+    display: none;
     margin: auto;
     width: 60rem;
 }
@@ -91,4 +104,7 @@ html, h1, p {
     list-style-type: none;
     text-align: center;
     color: grey;
+}
+#instruction-container span {
+    color: rgba(54, 122, 230, 255);
 }
