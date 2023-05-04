@@ -1,4 +1,4 @@
-* {
+html, h1, p {
   margin: 0;
   font-size: 10px;
   font-family: "Roboto", sans-serif;
@@ -10,20 +10,35 @@
   background-color: rgba(54, 122, 230, 255);
 }
 .red-hover:hover {
-    background-color: red;
+  background-color: red;
 }
 .blue-hover:hover {
-    background-color: rgba(54, 122, 230, 255);
+  background-color: rgba(54, 122, 230, 255);
 }
 
 #border {
   border: solid 0.1rem lightgrey;
+  border-radius: 0.5rem;
   width: 60rem;
   height: 40rem;
   display: flex;
   margin: auto;
   margin-top: 20rem;
 }
+
+#dino-container {
+  display: flex;
+  justify-content: center;
+  height: 40%;
+  width: 50%;
+  margin: auto;
+}
+#dino-container > img {
+  margin: auto;
+  width: 40%;
+  height: 70%;
+}
+
 #menu {
   width: 100%;
   height: 100%;
@@ -36,28 +51,44 @@
   display: flex;
   flex-direction: column;
 }
-#buttons button {
+#buttons > button {
   padding: 2rem;
   margin: 2rem auto;
-  display: flex;
-  height: 2rem;
-  border: 0;
+  height: 4rem;
+  border: none;
+  width: 35%;
   border-radius: 0.3rem;
+  display: flex;
   align-items: center;
+  justify-content: space-around;
   font-size: 2rem;
   color: white;
-  font-weight: lighter;
 }
 
-#dino {
-  display: flex;
-  justify-content: center;
-  height: 40%;
-  width: 50%;
-  margin: auto;
+#instruction-container {
+    padding-top: 2rem;
+    display: block;
+    margin: auto;
+    width: 60rem;
 }
-#dino img {
-  margin: auto;
-  width: 40%;
-  height: 70%;
+
+#instruction-container > h1 {
+    font-size: 3rem;
+    text-align: center;
+    padding-bottom: 4rem;
+    color: grey;
+}
+#instruction-container > ul {
+    padding: 0;
+    font-size: 2rem;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+#instruction-container > ul > li {
+    margin-bottom: 2rem;
+    width: 100%;
+    list-style-type: none;
+    text-align: center;
+    color: grey;
 }
