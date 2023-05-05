@@ -8,17 +8,33 @@
     <title>Game Project</title>
   </head>
   <body>
-    <main id="starting-screen">
+    <main id="border">
       <div id="menu">
-      <div id="test">
+      <div id="dino-container">
         <img src="images/dino-run.gif" alt="Dino-run">
       </div>
       <div id="buttons">
-        <button type="button" class="blue">START GAME</button>
-        <button type="button" class="grey">INSTRUCTIONS</button>
+        <button type="button" class="bb-wt blue-hover" id="start-game">RAAAAWR</button>
+        <button type="button" class="wb-bt b-border grey-hover" id="instructions">INSTRUCTIONS</button>
       </div>
       </div>
     </main>
+    <div id="instruction-container">
+      <ul>
+        <li>
+          PRESS THE <span>'RAAAAWR'</span> BUTTON TO START THE GAME
+        </li>
+        <li>
+          PRESS <span>'BUTTON'</span> TO JUMP
+        </li>
+        <li>
+          PRESS <span>'BUTTON'</span> TO CROUCH
+        </li>
+        <li>
+          <span>SURVIVE FOR AS LONG AS YOU CAN</span>
+        </li>
+      </ul>
+    </div>
     <script type="text/javascript" src="js/index.js"></script>
   </body>
 </html>
