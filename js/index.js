@@ -18,6 +18,10 @@ const smallCac = '/images/cactus-small.png'
 const largeCac = '/images/cactus-large.png'
 const bigCac = '/images/cactus-big.png'
 
+//initate the background image
+const bgImage = new Image();
+bgImage.src = "./images/bg.png";
+
 // Getting the instructions element
 const instrButton = document.getElementById("instructions");
 const instrContainer = document.getElementById("instruction-container");
@@ -91,20 +95,23 @@ let currentDinoImage = dinoRight;
 let frameCount = 0;
 const frameInterval = 16;
 
-// creates a 'hitbox' for the dino as well as updating the image depending on the frameCount above.
-function dinoRun() {
-  context.clearRect(dino.x, dino.y, dino.width, dino.height);
-  frameCount++;
-  if (frameCount % frameInterval === 0) {
-    if (currentDinoImage === dinoRight) {
-      currentDinoImage = dinoLeft;
-    } else {
-      currentDinoImage = dinoRight;
+// creates the background object
+let background = {
+  img: bgImage,
+  x: 0,
+  y: 100,
+  speedX: -4,
+  move: function () {
+    this.x += this.speedX;
+    if (this.x <= -this.img.width) {
+      this.x = 0;
     }
-  }
-  context.drawImage(currentDinoImage, dino.x, dino.y, dino.width, dino.height);
-  requestAnimationFrame(dinoRun);
-}
+  },
+  draw: function () {
+    context.drawImage(this.img, this.x, this.y);
+    context.drawImage(this.img, this.x + this.img.width, this.y);
+  },
+};
 
 // Dino jump mechanic.
 function dinoJump(e) {
@@ -116,9 +123,12 @@ function dinoJump(e) {
 function updateGame() {
   dino.speedY += dino.gravity;
   dino.y = Math.min(dino.y + dino.speedY, dino.ground);
+  background.move();
 
   context.clearRect(0, 0, canvas.width, canvas.height);
   frameCount++;
+  background.draw();
+
   if (frameCount % frameInterval === 0) {
     if (currentDinoImage === dinoRight) {
       currentDinoImage = dinoLeft;
