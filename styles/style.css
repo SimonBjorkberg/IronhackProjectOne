@@ -19,6 +19,7 @@ html, h1, p {
     display: block;
 }
 
+/* BEGINNING OF STARTING SCREEN CSS */
 #border {
   border: solid 0.1rem lightgrey;
   border-radius: 0.5rem;
@@ -28,7 +29,6 @@ html, h1, p {
   margin: auto;
   margin-top: 20rem;
 }
-
 #dino-container {
   display: flex;
   justify-content: center;
@@ -41,7 +41,6 @@ html, h1, p {
   width: 40%;
   height: 70%;
 }
-
 #menu {
   width: 100%;
   height: 100%;
@@ -77,14 +76,12 @@ html, h1, p {
 .b-border {
     border: solid 0.2rem rgba(54, 122, 230, 255);
 }
-
 #instruction-container {
     padding-top: 2rem;
     display: none;
     margin: auto;
     width: 60rem;
 }
-
 #instruction-container > h1 {
     font-size: 3rem;
     text-align: center;
@@ -107,4 +104,15 @@ html, h1, p {
 }
 #instruction-container span {
     color: rgba(54, 122, 230, 255);
+}
+/* END OF STARTING SCREEN CSS */
+
+
+
+/* Canvas CSS */
+#canvas {
+  display: flex;
+  margin: auto;
+  border: solid 0.1rem lightgrey;
+  border-radius: 0.5rem;
 }
