@@ -84,6 +84,9 @@ function updateObstacles() {
     for (i = 0; i < obstacles.length; i++) {
         obstacles[i].x += -4;
         obstacles[i].update();
+        if (obstacles[i].checkCollision(dino)) {
+          //  console.log('collided')
+        }
     }
     if (frameCount % 120 === 0 ) {
         const allObstacles = [];
