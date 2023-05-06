@@ -111,8 +111,10 @@ html, h1, p {
 
 /* Canvas CSS */
 #canvas {
-  display: flex;
+  display: none;
   margin: auto;
   border: solid 0.1rem lightgrey;
   border-radius: 0.5rem;
+  margin: auto;
+  margin-top: 20rem;
 }

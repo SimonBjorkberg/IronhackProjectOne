@@ -1,27 +1,45 @@
 // Getting the instructions element
-const instructions = document.getElementById('instructions')
-const instructionContainer = document.getElementById('instruction-container')
+const instrButton = document.getElementById('instructions')
+const instrContainer = document.getElementById('instruction-container')
 
-// mouseover/mouseout event listeners to make a kind of 'drop down' menu.
-instructions.addEventListener('mouseover', () => {
-    instructionContainer.style.display = 'block'
-})
-instructions.addEventListener('mouseout', () => {
-    instructionContainer.style.display = 'none'
-})
-
-// getting the canvas element from html
+// Getting the canvas element from html
 const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
 
-// Updating the dino image (Creating a runnin animation)
+// Getting the start/RAAAAWR button and the main men screen, as well as the game canvas
+const startButton = document.getElementById('start-game')
+const mainMenu = document.getElementById('border')
+
+// Mouseover/mouseout event listeners to make a kind of 'drop down' menu.
+instrButton.addEventListener('mouseover', () => {
+    instrContainer.style.display = 'block'
+})
+instrButton.addEventListener('mouseout', () => {
+    instrContainer.style.display = 'none'
+})
+
+// Mouseover/mouseout event listeners to make a kind of 'drop down' menu.
+instrButton.addEventListener('mouseover', () => {
+    instrContainer.style.display = 'block'
+})
+instrButton.addEventListener('mouseout', () => {
+    instrContainer.style.display = 'none'
+})
+
+// START THE GAME BUTTON
+startButton.addEventListener('click', () => {
+    mainMenu.style.display = 'none'
+    canvas.style.display = 'flex'
+})
+
+// Updating the dino image (Creating a running animation)
 const dinoLeft = new Image();
 dinoLeft.src = "./images/Dino-left.png";
 
 const dinoRight = new Image();
 dinoRight.src = "./images/Dino-right.png";
 
-// dimensions and draw positions of the dinosaur, also defines the Y position of the ground.
+// Dimensions and draw positions of the dinosaur, also defines the Y position of the ground.
 let dino = {
   x: 64,
   y: 240,
@@ -60,7 +78,7 @@ function dinoJump(e) {
   }
 }
 
-// updates the mechanics of the game
+
 function updateGame() {
   dino.speedY += dino.gravity;
   dino.y = Math.min(dino.y + dino.speedY, dino.ground);
@@ -75,7 +93,7 @@ function updateGame() {
     }
   }
   context.drawImage(currentDinoImage, dino.x, dino.y, dino.width, dino.height);
-  
+
   requestAnimationFrame(updateGame);
 }
 
