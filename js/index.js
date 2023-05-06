@@ -29,7 +29,7 @@ class Obstacle {
 const smallCac = "/images/cactus-small.png";
 const largeCac = "/images/cactus-large.png";
 const bigCac = "/images/cactus-big.png";
-const flyingDino = "/images/ezgif.com-gif-maker.gif"
+const flyingDino = "/images/ezgif.com-gif-maker.gif";
 
 //initate the background image
 const bgImage = new Image();
@@ -50,6 +50,9 @@ const mainMenu = document.getElementById("border");
 //adding audio
 const jumpSound = new Audio("/audio/jump-dino.mp3");
 const gameStop = new Audio("/audio/game-stop.mp3");
+const bgMusic = new Audio("/audio/bgMusic.mp3");
+bgMusic.loop = true;
+bgMusic.volume = 0.09;
 
 // Mouseover/mouseout event listeners to make a kind of 'drop down' menu.
 instrButton.addEventListener("mouseover", () => {
@@ -82,24 +85,25 @@ dinoRight.src = "./images/Dino-right.png";
 
 const obstacles = [];
 function updateObstacles() {
-    const allObstacles = [];
-    for (i = 0; i < obstacles.length; i++) {
-        obstacles[i].x += -4;
-        obstacles[i].update();
-        if (obstacles[i].checkCollision(dino)) { 
-             console.log('test')
-        }
+  const allObstacles = [];
+  for (i = 0; i < obstacles.length; i++) {
+    obstacles[i].x += -4;
+    obstacles[i].update();
+    if (obstacles[i].checkCollision(dino)) {
+      console.log("test");
     }
-    if (frameCount % 120 === 0 ) {
-        let smallCactus = new Obstacle(25, 42, smallCac, canvas.width, 260, 0)
-        let largeCactus = new Obstacle(65, 52, largeCac, canvas.width, 250, 0)
-        let bigCactus = new Obstacle(35, 52, bigCac, canvas.width, 250, 0)
-        let flyDino = new Obstacle(100, 100, flyingDino, canvas.width, 140, 0)
-        allObstacles.push(bigCactus, largeCactus, smallCactus, flyDino)
-        let randomObstacle = Math.floor(Math.random() * allObstacles.length)
-        obstacles.push(allObstacles[randomObstacle])
-    }
-    requestAnimationFrame(updateObstacles);
+  }
+  
+  if (frameCount % 120 === 0) {
+    let smallCactus = new Obstacle(25, 42, smallCac, canvas.width, 260, 0);
+    let largeCactus = new Obstacle(65, 52, largeCac, canvas.width, 250, 0);
+    let bigCactus = new Obstacle(35, 52, bigCac, canvas.width, 250, 0);
+    let flyDino = new Obstacle(100, 100, flyingDino, canvas.width, 140, 0);
+    allObstacles.push(bigCactus, largeCactus, smallCactus, flyDino);
+    let randomObstacle = Math.floor(Math.random() * allObstacles.length);
+    obstacles.push(allObstacles[randomObstacle]);
+  }
+  requestAnimationFrame(updateObstacles);
 }
 
 // Dimensions and draw positions of the dinosaur, also defines the Y position of the ground.
@@ -138,7 +142,6 @@ let background = {
 
 // Dino jump mechanic.
 function dinoJump(e) {
-  
   if (e.code == "Space" && dino.y === dino.ground) {
     if (dino.y <= dino.ground) {
       jumpSound.play();
@@ -200,10 +203,11 @@ function updateGame() {
   background.draw();
   drawDino();
   calculatePoint();
+  bgMusic.play();
   requestAnimationFrame(updateGame);
 }
 
-startButton.addEventListener("click", ()=>{
+startButton.addEventListener("click", () => {
   updateGame();
   updateObstacles();
 });
