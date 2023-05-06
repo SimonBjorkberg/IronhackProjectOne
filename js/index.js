@@ -81,23 +81,20 @@ dinoRight.src = "./images/Dino-right.png";
 
 const obstacles = [];
 function updateObstacles() {
-  for (i = 0; i < obstacles.length; i++) {
-    obstacles[i].x += -4;
-    obstacles[i].update();
-    if (obstacles[i].checkCollision(dino)) {
-      //  console.log('collision testing')
+    for (i = 0; i < obstacles.length; i++) {
+        obstacles[i].x += -4;
+        obstacles[i].update();
     }
-  }
-  if (frameCount % 120 === 0) {
-    const allObstacles = [];
-    let smallCactus = new Obstacle(25, 42, smallCac, canvas.width, 260, 0);
-    let largeCactus = new Obstacle(65, 52, largeCac, canvas.width, 250, 0);
-    let bigCactus = new Obstacle(35, 52, bigCac, canvas.width, 250, 0);
-    allObstacles.push(bigCactus, largeCactus, smallCactus);
-    let randomObstacle = Math.floor(Math.random() * allObstacles.length);
-    obstacles.push(allObstacles[randomObstacle]);
-  }
-  requestAnimationFrame(updateObstacles);
+    if (frameCount % 120 === 0 ) {
+        const allObstacles = [];
+        let smallCactus = new Obstacle(25, 42, smallCac, canvas.width, 260, 0)
+        let largeCactus = new Obstacle(65, 52, largeCac, canvas.width, 250, 0)
+        let bigCactus = new Obstacle(35, 52, bigCac, canvas.width, 250, 0)
+        allObstacles.push(bigCactus, largeCactus, smallCactus)
+        let randomObstacle = Math.floor(Math.random() * allObstacles.length)
+        obstacles.push(allObstacles[randomObstacle])
+    }
+    requestAnimationFrame(updateObstacles);
 }
 
 // Dimensions and draw positions of the dinosaur, also defines the Y position of the ground.
@@ -136,8 +133,11 @@ let background = {
 
 // Dino jump mechanic.
 function dinoJump(e) {
-  jumpSound.play();
+  
   if (e.code == "Space" && dino.y === dino.ground) {
+    if (dino.y <= dino.ground) {
+      jumpSound.play();
+    }
     dino.speedY = -7.5;
   }
 }
@@ -194,12 +194,11 @@ function updateGame() {
   frameCount++;
   background.draw();
   drawDino();
-
   calculatePoint();
   requestAnimationFrame(updateGame);
 }
 
-dinoRight.addEventListener("load", () => {
+startButton.addEventListener("click", ()=>{
   updateGame();
   updateObstacles();
 });
