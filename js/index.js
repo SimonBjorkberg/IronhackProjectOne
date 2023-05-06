@@ -85,6 +85,7 @@ function updateObstacles() {
     obstacles[i].x += -4;
     obstacles[i].update();
     if (obstacles[i].checkCollision(dino)) {
+      //  console.log('collision testing')
     }
   }
   if (frameCount % 120 === 0) {
