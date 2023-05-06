@@ -162,7 +162,7 @@ function updateGame() {
   requestAnimationFrame(updateGame);
 }
 
-dinoRight.addEventListener("load", () => {
+startButton.addEventListener("click", ()=>{
   updateGame();
   updateObstacles();
 });
