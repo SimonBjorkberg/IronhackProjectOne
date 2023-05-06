@@ -3,13 +3,13 @@ class Obstacle {
     this.width = width;
     this.height = height;
     this.image = new Image();
-    this.image.src = image
+    this.image.src = image;
     this.x = x;
     this.y = y;
     this.speed = speed;
   }
   update() {
-    this.x += -this.speed
+    this.x += -this.speed;
     context.drawImage(this.image, this.x, this.y, this.width, this.height);
   }
 }
@@ -17,7 +17,6 @@ class Obstacle {
 const smallCac = '/images/cactus-small.png'
 const largeCac = '/images/cactus-large.png'
 const bigCac = '/images/cactus-big.png'
-const flyingDino = '/images/ezgif.com-gif-maker.gif'
 
 //initate the background image
 const bgImage = new Image();
@@ -34,6 +33,10 @@ const context = canvas.getContext("2d");
 // Getting the start/RAAAAWR button and the main men screen, as well as the game canvas
 const startButton = document.getElementById("start-game");
 const mainMenu = document.getElementById("border");
+
+//adding audio
+const jumpSound = new Audio("/audio/jump-dino.mp3");
+const gameStop = new Audio("/audio/game-stop.mp3");  
 
 // Mouseover/mouseout event listeners to make a kind of 'drop down' menu.
 instrButton.addEventListener("mouseover", () => {
@@ -72,11 +75,10 @@ function updateObstacles() {
     }
     if (frameCount % 120 === 0 ) {
         const allObstacles = [];
-        let flyingObstacle = new Obstacle(100, 100, flyingDino, canvas.width, 150, -1)
         let smallCactus = new Obstacle(25, 42, smallCac, canvas.width, 260, 0)
         let largeCactus = new Obstacle(65, 52, largeCac, canvas.width, 250, 0)
         let bigCactus = new Obstacle(35, 52, bigCac, canvas.width, 250, 0)
-        allObstacles.push(bigCactus, largeCactus, smallCactus, flyingObstacle)
+        allObstacles.push(bigCactus, largeCactus, smallCactus)
         let randomObstacle = Math.floor(Math.random() * allObstacles.length)
         obstacles.push(allObstacles[randomObstacle])
     }
@@ -119,30 +121,26 @@ let background = {
 
 // Dino jump mechanic.
 function dinoJump(e) {
+  
+  jumpSound.play();
   if (e.code == "Space" && dino.y === dino.ground) {
     dino.speedY = -7.5;
   }
 }
 
 //creat a point system and show on canvas
-function calculatePoint(){
+function calculatePoint() {
   let points = 0;
-  points = Math.floor(frameCount/8);
-  context.font  = "18px sans-serif";
+  points = Math.floor(frameCount / 8);
+  context.font = "18px sans-serif";
   context.fillStyle = "black";
   context.fillText(`Score: ${points}`, 480, 60);
-  return points
+  return points;
 }
 
-function updateGame() {
+function drawDino() {
   dino.speedY += dino.gravity;
   dino.y = Math.min(dino.y + dino.speedY, dino.ground);
-  background.move();
-
-  context.clearRect(0, 0, canvas.width, canvas.height);
-  frameCount++;
-  background.draw();
-
   if (frameCount % frameInterval === 0) {
     if (currentDinoImage === dinoRight) {
       currentDinoImage = dinoLeft;
@@ -151,6 +149,15 @@ function updateGame() {
     }
   }
   context.drawImage(currentDinoImage, dino.x, dino.y, dino.width, dino.height);
+}
+
+function updateGame() {
+  background.move();
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  frameCount++;
+  background.draw();
+  drawDino();
+
   calculatePoint();
   requestAnimationFrame(updateGame);
 }
