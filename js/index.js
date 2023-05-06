@@ -64,7 +64,6 @@ dinoLeft.src = "./images/Dino-left.png";
 const dinoRight = new Image();
 dinoRight.src = "./images/Dino-right.png";
 
-
 const obstacles = [];
 function updateObstacles() {
     for (i = 0; i < obstacles.length; i++) {
@@ -125,6 +124,16 @@ function dinoJump(e) {
   }
 }
 
+//creat a point system and show on canvas
+function calculatePoint(){
+  let points = 0;
+  points = Math.floor(frameCount/8);
+  context.font  = "18px sans-serif";
+  context.fillStyle = "black";
+  context.fillText(`Score: ${points}`, 480, 60);
+  return points
+}
+
 function updateGame() {
   dino.speedY += dino.gravity;
   dino.y = Math.min(dino.y + dino.speedY, dino.ground);
@@ -142,13 +151,13 @@ function updateGame() {
     }
   }
   context.drawImage(currentDinoImage, dino.x, dino.y, dino.width, dino.height);
-
+  calculatePoint();
   requestAnimationFrame(updateGame);
 }
 
 dinoRight.addEventListener("load", () => {
   updateGame();
-  updateObstacles()
+  updateObstacles();
 });
 
 // event listener that waits for the space button to get pressed, causing the dino to jump
