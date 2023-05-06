@@ -12,11 +12,23 @@ class Obstacle {
     this.x += -this.speed;
     context.drawImage(this.image, this.x, this.y, this.width, this.height);
   }
+  checkCollision(dino) {
+    if (
+      this.x < dino.x + dino.width &&
+      this.x + this.width > dino.x &&
+      this.y < dino.y + dino.height &&
+      this.y + this.height > dino.y
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 
-const smallCac = '/images/cactus-small.png'
-const largeCac = '/images/cactus-large.png'
-const bigCac = '/images/cactus-big.png'
+const smallCac = "/images/cactus-small.png";
+const largeCac = "/images/cactus-large.png";
+const bigCac = "/images/cactus-big.png";
 
 //initate the background image
 const bgImage = new Image();
@@ -36,7 +48,7 @@ const mainMenu = document.getElementById("border");
 
 //adding audio
 const jumpSound = new Audio("/audio/jump-dino.mp3");
-const gameStop = new Audio("/audio/game-stop.mp3");  
+const gameStop = new Audio("/audio/game-stop.mp3");
 
 // Mouseover/mouseout event listeners to make a kind of 'drop down' menu.
 instrButton.addEventListener("mouseover", () => {
@@ -69,20 +81,22 @@ dinoRight.src = "./images/Dino-right.png";
 
 const obstacles = [];
 function updateObstacles() {
-    for (i = 0; i < obstacles.length; i++) {
-        obstacles[i].x += -4;
-        obstacles[i].update();
+  for (i = 0; i < obstacles.length; i++) {
+    obstacles[i].x += -4;
+    obstacles[i].update();
+    if (obstacles[i].checkCollision(dino)) {
     }
-    if (frameCount % 120 === 0 ) {
-        const allObstacles = [];
-        let smallCactus = new Obstacle(25, 42, smallCac, canvas.width, 260, 0)
-        let largeCactus = new Obstacle(65, 52, largeCac, canvas.width, 250, 0)
-        let bigCactus = new Obstacle(35, 52, bigCac, canvas.width, 250, 0)
-        allObstacles.push(bigCactus, largeCactus, smallCactus)
-        let randomObstacle = Math.floor(Math.random() * allObstacles.length)
-        obstacles.push(allObstacles[randomObstacle])
-    }
-    requestAnimationFrame(updateObstacles);
+  }
+  if (frameCount % 120 === 0) {
+    const allObstacles = [];
+    let smallCactus = new Obstacle(25, 42, smallCac, canvas.width, 260, 0);
+    let largeCactus = new Obstacle(65, 52, largeCac, canvas.width, 250, 0);
+    let bigCactus = new Obstacle(35, 52, bigCac, canvas.width, 250, 0);
+    allObstacles.push(bigCactus, largeCactus, smallCactus);
+    let randomObstacle = Math.floor(Math.random() * allObstacles.length);
+    obstacles.push(allObstacles[randomObstacle]);
+  }
+  requestAnimationFrame(updateObstacles);
 }
 
 // Dimensions and draw positions of the dinosaur, also defines the Y position of the ground.
@@ -99,7 +113,7 @@ let dino = {
 // sets the first image of the dino (with the right leg down) as well as the frameInterval(how fast it's running).
 let currentDinoImage = dinoRight;
 let frameCount = 0;
-const frameInterval = 16;
+let frameInterval = 16;
 
 // creates the background object
 let background = {
@@ -121,7 +135,6 @@ let background = {
 
 // Dino jump mechanic.
 function dinoJump(e) {
-  
   jumpSound.play();
   if (e.code == "Space" && dino.y === dino.ground) {
     dino.speedY = -7.5;
@@ -149,6 +162,29 @@ function drawDino() {
     }
   }
   context.drawImage(currentDinoImage, dino.x, dino.y, dino.width, dino.height);
+}
+
+function checkCollision(dino) {
+  const obstacleLeft = this.x;
+  const obstacleRight = this.x + this.width;
+  const obstacleTop = this.y;
+  const obstacleBottom = this.y + this.height;
+
+  const dinoLeft = dino.x;
+  const dinoRight = dino.x + dino.width;
+  const dinoTop = dino.y;
+  const dinoBottom = dino.y + dino.height;
+
+  if (
+    obstacleLeft < dinoRight &&
+    obstacleRight > dinoLeft &&
+    obstacleTop < dinoBottom &&
+    obstacleBottom > dinoTop
+  ) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 function updateGame() {
