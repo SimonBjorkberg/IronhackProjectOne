@@ -75,7 +75,7 @@ function updateGame() {
     }
   }
   context.drawImage(currentDinoImage, dino.x, dino.y, dino.width, dino.height);
-
+  
   requestAnimationFrame(updateGame);
 }
 
