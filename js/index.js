@@ -17,6 +17,7 @@ class Obstacle {
 const smallCac = '/images/cactus-small.png'
 const largeCac = '/images/cactus-large.png'
 const bigCac = '/images/cactus-big.png'
+const flyingDino = '/images/ezgif.com-gif-maker.gif'
 
 //initate the background image
 const bgImage = new Image();
@@ -72,10 +73,11 @@ function updateObstacles() {
     }
     if (frameCount % 120 === 0 ) {
         const allObstacles = [];
+        let flyingObstacle = new Obstacle(100, 100, flyingDino, canvas.width, 150, -1)
         let smallCactus = new Obstacle(25, 42, smallCac, canvas.width, 260, 0)
         let largeCactus = new Obstacle(65, 52, largeCac, canvas.width, 250, 0)
         let bigCactus = new Obstacle(35, 52, bigCac, canvas.width, 250, 0)
-        allObstacles.push(bigCactus, largeCactus, smallCactus)
+        allObstacles.push(bigCactus, largeCactus, smallCactus, flyingObstacle)
         let randomObstacle = Math.floor(Math.random() * allObstacles.length)
         obstacles.push(allObstacles[randomObstacle])
     }
