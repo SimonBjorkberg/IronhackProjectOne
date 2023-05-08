@@ -66,7 +66,7 @@ This is the state when the audio files are loaded and ready to play.
 * Dino running state: 
 This is the state when the dino is running and its legs are switching between images to give the illusion of movement.
 
-Dino jumping state: 
+* Dino jumping state: 
 This is the state when the user presses the spacebar and the dino jumps up.
 
 # Task
