@@ -58,7 +58,7 @@ bgMusic.volume = 0.09;
 const gameOverButton = document.getElementById("game-over-button");
 const gameOverScreen = document.getElementById("game-over-screen");
 gameOverButton.addEventListener("click", () => {
-  location.reload()
+  location.reload();
 });
 
 // Mouseover/mouseout event listeners to make a kind of 'drop down' menu.
@@ -90,6 +90,9 @@ dinoLeft.src = "./images/Dino-left.png";
 const dinoRight = new Image();
 dinoRight.src = "./images/Dino-right.png";
 
+//using animationID to capture the requestAniamtionframe.
+let animationID;
+
 const obstacles = [];
 function updateObstacles() {
   const allObstacles = [];
@@ -97,6 +100,11 @@ function updateObstacles() {
     obstacles[i].x += -4;
     obstacles[i].update();
     if (obstacles[i].checkCollision(dino)) {
+      //cancel the reqquestAnimationFrame on updateGame function using cancelAnimationFrame method,
+      cancelAnimationFrame(animationID);
+      //stop music
+      bgMusic.pause();
+      
       gameOverScreen.style.display = "flex";
       canvas.style.display = "none";
     }
@@ -217,13 +225,12 @@ function updateGame() {
   drawDino();
   calculatePoint();
   bgMusic.play();
-  requestAnimationFrame(updateGame);
+  animationID = requestAnimationFrame(updateGame);
+  // event listener that waits for the space button to get pressed, causing the dino to jump
+  document.addEventListener("keydown", dinoJump);
 }
 
 startButton.addEventListener("click", () => {
   updateGame();
   updateObstacles();
 });
-
-// event listener that waits for the space button to get pressed, causing the dino to jump
-document.addEventListener("keydown", dinoJump);
