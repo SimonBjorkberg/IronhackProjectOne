@@ -39,7 +39,7 @@ background object
 Audio
 
 ### sound effects
-* The game includes sound effects for jumping and game over, as well as background music.
+* The game includes sound effects for jumping, as well as background music.
 
 # States y States transitions
 * Initial state: 
