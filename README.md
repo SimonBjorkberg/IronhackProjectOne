@@ -86,6 +86,6 @@ This is the state when the user presses the spacebar and the dino jumps up.
 # Links
 * https://github.com/SimonBjorkberg/IronhackProjectOne
 * https://trello.com/b/qZWc3Pkf/game-project
-* // PRESENTATION LINK 
+* https://docs.google.com/presentation/d/1CTr5ogfZZ43Pv9nIDJq_bMTGBW-HnQr43CZxV0tXHiQ/edit?usp=sharing
 * // DEPLOYMENT LINK
 
