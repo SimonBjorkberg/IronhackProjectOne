@@ -84,5 +84,8 @@ This is the state when the user presses the spacebar and the dino jumps up.
 12. Added a "return to main menu" button to allow players to restart the game or return to the main menu after losing or winning.
 
 # Links
-
+https://github.com/SimonBjorkberg/IronhackProjectOne
+https://trello.com/b/qZWc3Pkf/game-project
+// PRESENTATION LINK 
+// DEPLOYMENT LINK
 
