@@ -70,6 +70,18 @@ Dino jumping state:
 This is the state when the user presses the spacebar and the dino jumps up.
 
 # Task
+    Created a Trello board to organize tasks and track progress.
+    Uploaded all necessary images to be used in the game.
+    Drew the dinosaur to be used as the main player character.
+    Created an animation for the player character.
+    Implemented the ability for the player character to jump.
+    Designed and created a starting screen for the game.
+    Developed a game background for the gameplay area.
+    Programmed the obstacles to move from right to left, towards the player character.
+    Ensured the game background moves in sync with the obstacles to create a more immersive experience.
+    Implemented a point system to track player progress and score.
+    Created a game over screen to be displayed when the player loses.
+    Added a "return to main menu" button to allow players to restart the game or return to the main menu after losing or winning.
 
 # Links
 
