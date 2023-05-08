@@ -20,10 +20,6 @@ html, h1, h3, p {
 }
 
 /* BEGINNING OF STARTING SCREEN CSS */
-#main-menu {
-
-}
-
 .border {
   border: solid 0.1rem lightgrey;
   border-radius: 0.5rem;

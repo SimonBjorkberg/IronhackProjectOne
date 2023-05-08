@@ -50,6 +50,9 @@ const mainMenu = document.getElementById("main-menu");
 //adding audio
 const jumpSound = new Audio("/audio/jump-dino.mp3");
 const gameStop = new Audio("/audio/game-stop.mp3");
+const bgMusic = new Audio("/audio/bgMusic.mp3");
+bgMusic.loop = true;
+bgMusic.volume = 0.09;
 
 // Game over button/screen
 const gameOverButton = document.getElementById("game-over-button");
@@ -213,6 +216,7 @@ function updateGame() {
   background.draw();
   drawDino();
   calculatePoint();
+  bgMusic.play();
   requestAnimationFrame(updateGame);
 }
 
