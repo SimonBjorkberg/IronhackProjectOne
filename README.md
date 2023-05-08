@@ -22,24 +22,24 @@ Modify the obstacle generation system to randomly vary the interval at which obs
 * The Obstacle class is used to create obstacles that the player must jump over. Each obstacle has a width, height, image, x and y position, and a speed.
 updateObstacles() function
 
-* updateObstacles function
-The updateObstacles() function updates the position of each obstacle, checks for collisions with the dinosaur, and creates new obstacles at random intervals.
+### updateObstacles function
+* The updateObstacles() function updates the position of each obstacle, checks for collisions with the dinosaur, and creates new obstacles at random intervals.
 dino object
 
-* dino object
-The dino object represents the player-controlled dinosaur. It has properties for x and y position, width and height, speed, ground level, and gravity.
+### dino object
+* The dino object represents the player-controlled dinosaur. It has properties for x and y position, width and height, speed, ground level, and gravity.
 Jumping mechanic
 
-* dinoJump function
-The dinoJump() function handles the jumping mechanic of the dinosaur. It listens for the space bar to be pressed, and applies a jump velocity to the dinosaur.
+### dinoJump function
+* The dinoJump() function handles the jumping mechanic of the dinosaur. It listens for the space bar to be pressed, and applies a jump velocity to the dinosaur.
 background object
 
-* background object
-The background object represents the scrolling background image. It has properties for the image, x and y position, and speed.
+### background object
+* The background object represents the scrolling background image. It has properties for the image, x and y position, and speed.
 Audio
 
-* sound effects
-The game includes sound effects for jumping and game over, as well as background music.
+### sound effects
+* The game includes sound effects for jumping and game over, as well as background music.
 
 # States y States transitions
 * Initial state: 
