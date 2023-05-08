@@ -1,7 +1,7 @@
 # Ironhack Project One
 
 # Description
-Luke and Simon's Game is a project created for learning purposes. The game, 'Jumpy Dino', is an endless runner game where the player controls a dinosaur that needs to jump over obstacles to avoid collision, The game finishes at 500 points. Simon and Luke utilized Github, GitBASH, JS, HTML, DOM and CSS to develop the game. This project was created as a part of the Ironhack course.
+This is a project created for learning purposes. The game, 'Jumpy Dino', is an endless runner game where the player controls a dinosaur that needs to jump over obstacles to avoid collision, The game finishes at 500 points. Simon and Luke utilized Github, GitBASH, JS, HTML, DOM and CSS to develop the game. This project was created as a part of the Ironhack course.
 
 # MVP
 A dinosaur character that can jump over obstacles.
