@@ -8,7 +8,7 @@
     <title>Game Project</title>
   </head>
   <body>
-    <main id="border">
+    <main id="main-menu" class="border">
       <div id="menu">
       <div id="dino-container">
         <img src="images/dino-run.gif" alt="Dino-run">
@@ -28,13 +28,20 @@
           PRESS <span>'SPACE'</span> TO JUMP
         </li>
         <li>
-          PRESS <span>'BUTTON'</span> TO CROUCH
-        </li>
-        <li>
-          <span>SURVIVE FOR AS LONG AS YOU CAN</span>
+          <span>COLLECT 500 POINTS!</span>
         </li>
       </ul>
     </div>
+
+    <section class="border" id="game-over-screen">
+      <div id="first-div">
+        <h1>GAME OVER</h1>
+        <h3>YOU HIT AN OBSTACLE</h3>
+      </div>
+      <div id="second-div">
+        <button type="button" class="wb-bt b-border grey-hover" id="game-over-button">BACK TO MAIN MENU</button>
+      </div>
+    </section>
 
     <canvas id="canvas" width="600" height="400"></canvas>
 

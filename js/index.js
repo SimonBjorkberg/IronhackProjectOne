@@ -29,7 +29,7 @@ class Obstacle {
 const smallCac = "/images/cactus-small.png";
 const largeCac = "/images/cactus-large.png";
 const bigCac = "/images/cactus-big.png";
-const flyingDino = "/images/ezgif.com-gif-maker.gif"
+const flyingDino = "/images/ezgif.com-gif-maker.gif";
 
 //initate the background image
 const bgImage = new Image();
@@ -45,11 +45,18 @@ const context = canvas.getContext("2d");
 
 // Getting the start/RAAAAWR button and the main men screen, as well as the game canvas
 const startButton = document.getElementById("start-game");
-const mainMenu = document.getElementById("border");
+const mainMenu = document.getElementById("main-menu");
 
 //adding audio
 const jumpSound = new Audio("/audio/jump-dino.mp3");
 const gameStop = new Audio("/audio/game-stop.mp3");
+
+// Game over button/screen
+const gameOverButton = document.getElementById("game-over-button");
+const gameOverScreen = document.getElementById("game-over-screen");
+gameOverButton.addEventListener("click", () => {
+  location.reload()
+});
 
 // Mouseover/mouseout event listeners to make a kind of 'drop down' menu.
 instrButton.addEventListener("mouseover", () => {
@@ -82,24 +89,25 @@ dinoRight.src = "./images/Dino-right.png";
 
 const obstacles = [];
 function updateObstacles() {
-    const allObstacles = [];
-    for (i = 0; i < obstacles.length; i++) {
-        obstacles[i].x += -4;
-        obstacles[i].update();
-        if (obstacles[i].checkCollision(dino)) { 
-             console.log('test')
-        }
+  const allObstacles = [];
+  for (i = 0; i < obstacles.length; i++) {
+    obstacles[i].x += -4;
+    obstacles[i].update();
+    if (obstacles[i].checkCollision(dino)) {
+      gameOverScreen.style.display = "flex";
+      canvas.style.display = "none";
     }
-    if (frameCount % 120 === 0 ) {
-        let smallCactus = new Obstacle(25, 42, smallCac, canvas.width, 260, 0)
-        let largeCactus = new Obstacle(65, 52, largeCac, canvas.width, 250, 0)
-        let bigCactus = new Obstacle(35, 52, bigCac, canvas.width, 250, 0)
-        let flyDino = new Obstacle(100, 100, flyingDino, canvas.width, 140, 0)
-        allObstacles.push(bigCactus, largeCactus, smallCactus, flyDino)
-        let randomObstacle = Math.floor(Math.random() * allObstacles.length)
-        obstacles.push(allObstacles[randomObstacle])
-    }
-    requestAnimationFrame(updateObstacles);
+  }
+  if (frameCount % 120 === 0) {
+    let smallCactus = new Obstacle(25, 42, smallCac, canvas.width, 260, 0);
+    let largeCactus = new Obstacle(65, 52, largeCac, canvas.width, 250, 0);
+    let bigCactus = new Obstacle(35, 52, bigCac, canvas.width, 250, 0);
+    let flyDino = new Obstacle(100, 100, flyingDino, canvas.width, 140, 0);
+    allObstacles.push(bigCactus, largeCactus, smallCactus, flyDino);
+    let randomObstacle = Math.floor(Math.random() * allObstacles.length);
+    obstacles.push(allObstacles[randomObstacle]);
+  }
+  requestAnimationFrame(updateObstacles);
 }
 
 // Dimensions and draw positions of the dinosaur, also defines the Y position of the ground.
@@ -138,7 +146,6 @@ let background = {
 
 // Dino jump mechanic.
 function dinoJump(e) {
-  
   if (e.code == "Space" && dino.y === dino.ground) {
     if (dino.y <= dino.ground) {
       jumpSound.play();
@@ -147,16 +154,21 @@ function dinoJump(e) {
   }
 }
 
-//creat a point system and show on canvas
+//creates a point system and show it in canvas. CURRENTLY SENDS U BACK TO MAIN MENU WHEN YOU HIT 100 POINTS.
 function calculatePoint() {
   let points = 0;
   points = Math.floor(frameCount / 8);
   context.font = "18px sans-serif";
   context.fillStyle = "black";
   context.fillText(`Score: ${points}`, 480, 60);
-  return points;
+  if (points >= 100) {
+    location.reload();
+  } else {
+    return points;
+  }
 }
 
+// Draws the dino and upates it's image to animate running
 function drawDino() {
   dino.speedY += dino.gravity;
   dino.y = Math.min(dino.y + dino.speedY, dino.ground);
@@ -170,6 +182,7 @@ function drawDino() {
   context.drawImage(currentDinoImage, dino.x, dino.y, dino.width, dino.height);
 }
 
+// Checks for collisions between the dino and ALL of the objects.
 function checkCollision(dino) {
   const obstacleLeft = this.x;
   const obstacleRight = this.x + this.width;
@@ -203,7 +216,7 @@ function updateGame() {
   requestAnimationFrame(updateGame);
 }
 
-startButton.addEventListener("click", ()=>{
+startButton.addEventListener("click", () => {
   updateGame();
   updateObstacles();
 });
