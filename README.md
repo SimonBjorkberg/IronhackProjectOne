@@ -42,28 +42,28 @@ Audio
 The game includes sound effects for jumping and game over, as well as background music.
 
 # States y States transitions
-## Initial state: 
+* Initial state: 
 This is the state when the code is first loaded in the browser. All the variables are declared, but none of the functions are called.
 
-## Main menu state: 
+* Main menu state: 
 This is the state when the user first sees the main menu screen with the "Start Game" button. The canvas and game over screen are hidden.
 
-## Gameplay state: 
+* Gameplay state: 
 This is the state when the user clicks the "Start Game" button and the gameplay begins. The dino, obstacles, and background start moving, and the user can control the dino to avoid the obstacles.
 
-## Game over state: 
+* Game over state: 
 This is the state when the dino collides with an obstacle and the game ends. The gameplay stops, and the game over screen is displayed with a "Try Again" button.
 
-## Instruction menu state: 
+* Instruction menu state: 
 This is the state when the user hovers over the "Instructions" button and the instruction menu drops down.
 
-## Instruction menu closed state: 
+* Instruction menu closed state: 
 This is the state when the user moves the mouse out of the instruction menu and the instruction menu disappears.
 
-## Audio state: 
+* Audio state: 
 This is the state when the audio files are loaded and ready to play.
 
-## Dino running state: 
+* Dino running state: 
 This is the state when the dino is running and its legs are switching between images to give the illusion of movement.
 
 Dino jumping state: 
