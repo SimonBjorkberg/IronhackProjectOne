@@ -19,7 +19,7 @@ Modify the obstacle generation system to randomly vary the interval at which obs
 
 # Data structure
 * Obstacle class
-The Obstacle class is used to create obstacles that the player must jump over. Each obstacle has a width, height, image, x and y position, and a speed.
+### The Obstacle class is used to create obstacles that the player must jump over. Each obstacle has a width, height, image, x and y position, and a speed.
 updateObstacles() function
 
 * updateObstacles function
