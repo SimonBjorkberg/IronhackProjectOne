@@ -81,7 +81,7 @@ This is the state when the user presses the spacebar and the dino jumps up.
 9. Ensured the game background moves in sync with the obstacles to create a more immersive experience.
 10. Implemented a point system to track player progress and score.
 11. Created a game over screen to be displayed when the player loses.
-12 .Added a "return to main menu" button to allow players to restart the game or return to the main menu after losing or winning.
+12. Added a "return to main menu" button to allow players to restart the game or return to the main menu after losing or winning.
 
 # Links
 
