@@ -90,9 +90,12 @@ startButton.addEventListener("click", () => {
 // Updating the dino image (creating a running animation)
 const dinoLeft = new Image();
 dinoLeft.src = "./images/Dino-left.png";
-
 const dinoRight = new Image();
 dinoRight.src = "./images/Dino-right.png";
+const crouchingDinoRight = new Image();
+crouchingDinoRight.src = "/images/Dino-crouch-right.png";
+const crouchingDinoLeft = new Image();
+crouchingDinoLeft.src = "/images/Dino-crouch-left.png";
 
 // Use animationID to capture the requestAniamtionframe.
 let animationID;
@@ -109,7 +112,6 @@ function updateObstacles() {
     obstacles[i].x += -4;
     obstacles[i].update();
     if (obstacles[i].checkCollision(dino)) {
-
       // Cancel the requestAnimationFrame on updateGame function
       cancelAnimationFrame(animationID);
 
@@ -128,7 +130,7 @@ function updateObstacles() {
       ).textContent = `${calculatePoint()}`;
     }
   }
-  
+
   // Randomly pick one of the generated obstacle and push to the obstacle array
   if (frameCount % 120 === 0) {
     let smallCactus = new Obstacle(25, 42, smallCac, canvas.width, 260, 0);
@@ -151,11 +153,12 @@ let dino = {
   speedY: 0,
   ground: 240,
   gravity: 0.25,
+  crouching: false,
 };
 
 // Set the first image of the dino (with the right leg down) as well as the frameInterval(how fast it's running).
 let currentDinoImage = dinoRight;
-let flyingDinoObstacle = flyDinoUp;
+let crouchingDino = crouchingDinoRight;
 let frameCount = 0;
 let frameInterval = 16;
 
@@ -177,15 +180,23 @@ let background = {
   },
 };
 
-// Dino jump mechanic.
-function dinoJump(e) {
+// Dino jump mechanic plus with dino crouching.
+function dinoJumpAndCrouch(e) {
   if (e.code == "Space" && dino.y === dino.ground) {
     if (dino.y <= dino.ground) {
       jumpSound.play();
     }
     dino.speedY = -7.5;
+  } else if (e.code == "ArrowDown" && dino.y === dino.ground) {
+    dino.crouching = true;
   }
 }
+
+document.addEventListener("keyup", (e) => {
+  if (e.code == "ArrowDown") {
+    dino.crouching = false;
+  }
+});
 
 // Create a point system and show on canvas. CURRENTLY SENDS U BACK TO MAIN MENU WHEN YOU HIT 100 POINTS.
 function calculatePoint() {
@@ -213,6 +224,23 @@ function drawDino() {
     }
   }
   context.drawImage(currentDinoImage, dino.x, dino.y, dino.width, dino.height);
+}
+
+function drawCrouchingDino() {
+  if (frameCount % frameInterval === 0) {
+    if (crouchingDino === crouchingDinoRight) {
+      crouchingDino = crouchingDinoLeft;
+    } else {
+      crouchingDino = crouchingDinoRight;
+    }
+  }
+  context.drawImage(
+    crouchingDino,
+    dino.x,
+    dino.y + 23,
+    dino.width + 30,
+    dino.height - 25
+  );
 }
 
 // Checks for collisions between the dino and ALL of the objects.
@@ -245,18 +273,21 @@ function updateGame() {
   context.clearRect(0, 0, canvas.width, canvas.height);
   frameCount++;
   background.draw();
-  drawDino();
+  if (dino.crouching) {
+    drawCrouchingDino();
+  } else {
+    drawDino();
+  }
   calculatePoint();
   bgMusic.play();
-
   // Set the animationID to be used when having collision
   animationID = requestAnimationFrame(updateGame);
-  
+
   // Event listener that waits for the space button to get pressed, causing the dino to jump
-  document.addEventListener("keydown", dinoJump);
+  document.addEventListener("keydown", dinoJumpAndCrouch);
 }
 
-// Button to click to start the game and update 
+// Button to click to start the game and update
 startButton.addEventListener("click", () => {
   updateGame();
   updateObstacles();
