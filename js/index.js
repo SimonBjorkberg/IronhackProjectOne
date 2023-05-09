@@ -26,12 +26,15 @@ class Obstacle {
   }
 }
 
+// Make the assets available to use
 const smallCac = "/images/cactus-small.png";
 const largeCac = "/images/cactus-large.png";
 const bigCac = "/images/cactus-big.png";
 const flyingDino = "/images/ezgif.com-gif-maker.gif";
+const flyDinoDown = "/images/Flying_Obstacle_Down.png";
+const flyDinoUp = "/images/Flying_Obstacle_Up.png";
 
-//initate the background image
+// Initate the background image
 const bgImage = new Image();
 bgImage.src = "./images/bg.png";
 
@@ -47,12 +50,13 @@ const context = canvas.getContext("2d");
 const startButton = document.getElementById("start-game");
 const mainMenu = document.getElementById("main-menu");
 
-//adding audio
+// Add audio
 const jumpSound = new Audio("/audio/jump-dino.mp3");
 const gameStop = new Audio("/audio/game-stop.mp3");
 const bgMusic = new Audio("/audio/bgMusic.mp3");
 bgMusic.loop = true;
 bgMusic.volume = 0.09;
+gameStop.volume = 0.2;
 
 // Game over button/screen
 const gameOverButton = document.getElementById("game-over-button");
@@ -83,40 +87,57 @@ startButton.addEventListener("click", () => {
   canvas.style.display = "flex";
 });
 
-// Updating the dino image (Creating a running animation)
+// Updating the dino image (creating a running animation)
 const dinoLeft = new Image();
 dinoLeft.src = "./images/Dino-left.png";
 
 const dinoRight = new Image();
 dinoRight.src = "./images/Dino-right.png";
 
-//using animationID to capture the requestAniamtionframe.
+// Use animationID to capture the requestAniamtionframe.
 let animationID;
+// Use endMusicPlayed to know if the stop music has played.
+let endMusicPlayed = false;
 
+// Create an array to keep the generated obstacles
 const obstacles = [];
+
+// Update and create obstacles
 function updateObstacles() {
-  const allObstacles = [];
+  const tempObstacles = [];
   for (i = 0; i < obstacles.length; i++) {
     obstacles[i].x += -4;
     obstacles[i].update();
     if (obstacles[i].checkCollision(dino)) {
-      //cancel the reqquestAnimationFrame on updateGame function using cancelAnimationFrame method,
+
+      // Cancel the requestAnimationFrame on updateGame function
       cancelAnimationFrame(animationID);
-      //stop music
+
+      // Stop music and play only once
       bgMusic.pause();
-      
+      if (!endMusicPlayed) {
+        gameStop.play();
+        endMusicPlayed = true;
+      }
+
+      // Show the game over screen and show the scores
       gameOverScreen.style.display = "flex";
       canvas.style.display = "none";
+      gameOverScreen.querySelector(
+        "h3 span"
+      ).textContent = `${calculatePoint()}`;
     }
   }
+  
+  // Randomly pick one of the generated obstacle and push to the obstacle array
   if (frameCount % 120 === 0) {
     let smallCactus = new Obstacle(25, 42, smallCac, canvas.width, 260, 0);
     let largeCactus = new Obstacle(65, 52, largeCac, canvas.width, 250, 0);
     let bigCactus = new Obstacle(35, 52, bigCac, canvas.width, 250, 0);
     let flyDino = new Obstacle(100, 100, flyingDino, canvas.width, 140, 0);
-    allObstacles.push(bigCactus, largeCactus, smallCactus, flyDino);
-    let randomObstacle = Math.floor(Math.random() * allObstacles.length);
-    obstacles.push(allObstacles[randomObstacle]);
+    tempObstacles.push(bigCactus, largeCactus, smallCactus, flyDino);
+    let randomObstacle = Math.floor(Math.random() * tempObstacles.length);
+    obstacles.push(tempObstacles[randomObstacle]);
   }
   requestAnimationFrame(updateObstacles);
 }
@@ -132,12 +153,13 @@ let dino = {
   gravity: 0.25,
 };
 
-// sets the first image of the dino (with the right leg down) as well as the frameInterval(how fast it's running).
+// Set the first image of the dino (with the right leg down) as well as the frameInterval(how fast it's running).
 let currentDinoImage = dinoRight;
+let flyingDinoObstacle = flyDinoUp;
 let frameCount = 0;
 let frameInterval = 16;
 
-// creates the background object
+// Create the background object and make it endless scrolled
 let background = {
   img: bgImage,
   x: 0,
@@ -165,7 +187,7 @@ function dinoJump(e) {
   }
 }
 
-//creates a point system and show it in canvas. CURRENTLY SENDS U BACK TO MAIN MENU WHEN YOU HIT 100 POINTS.
+// Create a point system and show on canvas. CURRENTLY SENDS U BACK TO MAIN MENU WHEN YOU HIT 100 POINTS.
 function calculatePoint() {
   let points = 0;
   points = Math.floor(frameCount / 8);
@@ -179,7 +201,7 @@ function calculatePoint() {
   }
 }
 
-// Draws the dino and upates it's image to animate running
+// Draw the dino and upates it's image to animate the running
 function drawDino() {
   dino.speedY += dino.gravity;
   dino.y = Math.min(dino.y + dino.speedY, dino.ground);
@@ -217,6 +239,7 @@ function checkCollision(dino) {
   }
 }
 
+// Execute all relevant functions in one with "requestAnimationFrame"
 function updateGame() {
   background.move();
   context.clearRect(0, 0, canvas.width, canvas.height);
@@ -225,11 +248,15 @@ function updateGame() {
   drawDino();
   calculatePoint();
   bgMusic.play();
+
+  // Set the animationID to be used when having collision
   animationID = requestAnimationFrame(updateGame);
-  // event listener that waits for the space button to get pressed, causing the dino to jump
+  
+  // Event listener that waits for the space button to get pressed, causing the dino to jump
   document.addEventListener("keydown", dinoJump);
 }
 
+// Button to click to start the game and update 
 startButton.addEventListener("click", () => {
   updateGame();
   updateObstacles();
