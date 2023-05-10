@@ -87,7 +87,7 @@ startButton.addEventListener("click", () => {
   canvas.style.display = "flex";
 });
 
-// Updating the dino image (creating a running animation)
+// Make the dino assets available
 const dinoLeft = new Image();
 dinoLeft.src = "./images/Dino-left.png";
 const dinoRight = new Image();
@@ -180,10 +180,11 @@ let background = {
   },
 };
 
-// Dino jump mechanic plus with dino crouching.
+// Create dino jump mechanic plus dino crouching.
 function dinoJumpAndCrouch(e) {
   if (e.code == "Space" && dino.y === dino.ground) {
     if (dino.y <= dino.ground) {
+      // Play jump sound effect.
       jumpSound.play();
     }
     dino.speedY = -7.5;
@@ -191,7 +192,6 @@ function dinoJumpAndCrouch(e) {
     dino.crouching = true;
   }
 }
-
 document.addEventListener("keyup", (e) => {
   if (e.code == "ArrowDown") {
     dino.crouching = false;
@@ -212,7 +212,7 @@ function calculatePoint() {
   }
 }
 
-// Draw the dino and upates it's image to animate the running
+// Draw the standing dino and upates it's image to animate the running
 function drawDino() {
   dino.speedY += dino.gravity;
   dino.y = Math.min(dino.y + dino.speedY, dino.ground);
@@ -226,6 +226,7 @@ function drawDino() {
   context.drawImage(currentDinoImage, dino.x, dino.y, dino.width, dino.height);
 }
 
+// Draw the crouching dino and upates it's image to animate the running
 function drawCrouchingDino() {
   if (frameCount % frameInterval === 0) {
     if (crouchingDino === crouchingDinoRight) {
@@ -267,12 +268,14 @@ function checkCollision(dino) {
   }
 }
 
-// Execute all relevant functions in one with "requestAnimationFrame"
+// Execute all relevant functions in one single function with "requestAnimationFrame"
 function updateGame() {
   background.move();
   context.clearRect(0, 0, canvas.width, canvas.height);
   frameCount++;
   background.draw();
+
+  //Extra logic to decide dino standing or crouching.
   if (dino.crouching) {
     drawCrouchingDino();
   } else {
@@ -280,10 +283,10 @@ function updateGame() {
   }
   calculatePoint();
   bgMusic.play();
-  // Set the animationID to be used when having collision
+  // Set the animationID to be used when having collision.
   animationID = requestAnimationFrame(updateGame);
 
-  // Event listener that waits for the space button to get pressed, causing the dino to jump
+  // Event listener that waits for the space button to get pressed, causing the dino to jump.
   document.addEventListener("keydown", dinoJumpAndCrouch);
 }
 
