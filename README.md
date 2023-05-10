@@ -27,19 +27,29 @@ updateObstacles() function
 dino object
 
 ### dino object
-* The dino object represents the player-controlled dinosaur. It has properties for x and y position, width and height, speed, ground level, and gravity.
+* The dino object represents the player-controlled dinosaur. It has properties for x and y position, width and height, speed, ground level, gravity and crouching.
 Jumping mechanic
 
-### dinoJump function
-* The dinoJump() function handles the jumping mechanic of the dinosaur. It listens for the space bar to be pressed, and applies a jump velocity to the dinosaur.
-background object
-
 ### background object
-* The background object represents the scrolling background image. It has properties for the image, x and y position, and speed.
-Audio
+* The background object represents and draws the scrolling background image. It has properties for the image, x and y position, and speed.
 
-### sound effects
-* The game includes sound effects for jumping, as well as background music.
+### dinoJumpAndCrouch function
+* The dinoJumpAndCrouch function handles the jumping as well as the crouching mechanic of the dinosaur. It listens to the space bar to be pressed, applies a jump velocity to the dinosaur, and plays sound effect. It also listen to the arrow down key to be pressed, causing the dino to crouch.
+
+### calculatePoint function
+* The calculatePoint function handles the calculation of how much points the player reached currently in the game.
+
+### drawDino function
+* The drawDino function draws the animated running standing dino
+
+### drawCrouchingDino function
+* The drawCrouchingDino function draws the animated running crouching dino
+
+### checkCollision function
+* The checkCollision function is in charge of checking if the dino has collision with all of the obstacle on the canvas.
+
+### updateGame function
+* The updateGame function is in charge of executing all animated elements on the canvas.
 
 # States y States transitions
 * Initial state: 
@@ -71,7 +81,7 @@ This is the state when the user presses the spacebar and the dino jumps up.
 
 # Task
 1. Created a Trello board to organize tasks and track progress.
-2. Uploaded all necessary images to be used in the game.
+2. Created and uploaded all necessary images to be used in the game.
 3. Drew the dinosaur to be used as the main player character.
 4. Created an animation for the player character.
 5. Implemented the ability for the player character to jump.
@@ -82,6 +92,7 @@ This is the state when the user presses the spacebar and the dino jumps up.
 10. Implemented a point system to track player progress and score.
 11. Created a game over screen to be displayed when the player loses.
 12. Added a "return to main menu" button to allow players to restart the game or return to the main menu after losing or winning.
+13. Added sound effect when dino jumps, background music and game over screen.
 
 # Links
 * https://github.com/SimonBjorkberg/IronhackProjectOne
