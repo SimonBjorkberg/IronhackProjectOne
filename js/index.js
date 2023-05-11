@@ -27,12 +27,10 @@ class Obstacle {
 }
 
 // Make the assets available to use
-const smallCac = "/images/cactus-small.png";
-const largeCac = "/images/cactus-large.png";
-const bigCac = "/images/cactus-big.png";
-const flyingDino = "/images/ezgif.com-gif-maker.gif";
-const flyDinoDown = "/images/Flying_Obstacle_Down.png";
-const flyDinoUp = "/images/Flying_Obstacle_Up.png";
+const smallCac = "./images/cactus-small.png";
+const largeCac = "./images/cactus-large.png";
+const bigCac = "./images/cactus-big.png";
+const flyingDino = "./images/ezgif.com-gif-maker.gif";
 
 // Initate the background image
 const bgImage = new Image();
