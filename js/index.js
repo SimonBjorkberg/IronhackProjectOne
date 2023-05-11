@@ -49,9 +49,9 @@ const startButton = document.getElementById("start-game");
 const mainMenu = document.getElementById("main-menu");
 
 // Add audio
-const jumpSound = new Audio("/audio/jump-dino.mp3");
-const gameStop = new Audio("/audio/game-stop.mp3");
-const bgMusic = new Audio("/audio/bgMusic.mp3");
+const jumpSound = new Audio("./audio/jump-dino.mp3");
+const gameStop = new Audio("./audio/game-stop.mp3");
+const bgMusic = new Audio("./audio/bgMusic.mp3");
 bgMusic.loop = true;
 bgMusic.volume = 0.09;
 gameStop.volume = 0.2;
@@ -91,9 +91,9 @@ dinoLeft.src = "./images/Dino-left.png";
 const dinoRight = new Image();
 dinoRight.src = "./images/Dino-right.png";
 const crouchingDinoRight = new Image();
-crouchingDinoRight.src = "/images/Dino-crouch-right.png";
+crouchingDinoRight.src = "./images/Dino-crouch-right.png";
 const crouchingDinoLeft = new Image();
-crouchingDinoLeft.src = "/images/Dino-crouch-left.png";
+crouchingDinoLeft.src = "./images/Dino-crouch-left.png";
 
 // Use animationID to capture the requestAniamtionframe.
 let animationID;
