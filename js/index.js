@@ -108,7 +108,7 @@ const obstacles = [];
 // Update and create obstacles
 function updateObstacles() {
   const tempObstacles = [];
-  for (i = 0; i < obstacles.length; i++) {
+  for (let i = 0; i < obstacles.length; i++) {
     obstacles[i].x += -4;
     obstacles[i].update();
     if (obstacles[i].checkCollision(dino)) {
@@ -205,11 +205,7 @@ function calculatePoint() {
   context.font = "18px sans-serif";
   context.fillStyle = "black";
   context.fillText(`Score: ${points}`, 480, 60);
-  if (points >= 100) {
-    location.reload();
-  } else {
     return points;
-  }
 }
 
 // Draw the standing dino and upates it's image to animate the running
