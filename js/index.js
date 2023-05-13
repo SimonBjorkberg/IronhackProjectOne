@@ -180,7 +180,7 @@ let background = {
 
 // Create dino jump mechanic plus dino crouching.
 function dinoJumpAndCrouch(e) {
-  if (e.code == "Space" && dino.y === dino.ground) {
+  if (e.code == "ArrowUp" && dino.y === dino.ground) {
     if (dino.y <= dino.ground) {
       // Play jump sound effect.
       jumpSound.play();
